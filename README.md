@@ -1,136 +1,177 @@
-# Social Networking Dinosaur 🦕
+# Dinosaur Social Networking Platform 🦕
 
-A modern social networking platform with live streaming, multiplayer games, and monetization features.
+A modern, feature-rich social networking application built with the MERN stack (MongoDB, Express, React, Node.js), featuring live streaming, gaming, messaging, and more!
 
-## Features
+## Features ✨
 
-### Core Social Features
-- 👤 User profiles with followers/following system
-- 📝 Public posts (text, images, videos)
-- 💬 Comments with nested replies
-- ❤️ Like system (posts & comments)
-- 🔔 Real-time notifications
-- 💌 Direct messaging with online status, read receipts, typing indicators
+- **User Authentication**: Secure login and registration with JWT
+- **Social Feed**: Create, like, and comment on posts
+- **Live Streaming**: Go live and watch live streams with real-time chat
+- **Gaming**: Play multiplayer games with other users
+- **Messaging**: Direct messaging with real-time notifications
+- **User Profiles**: Customizable profiles with followers/following
+- **Gift System**: Send gifts to streamers and earn rewards
+- **Subscriptions**: Premium membership with exclusive features
+- **Responsive Design**: Works seamlessly on desktop and mobile
 
-### Live Streaming
-- 🎥 Video live streaming
-- 🎙️ Audio live streaming
-- 💬 Live chat during streams
-- 🎁 Gift system with monetization
-- 👥 Host feature (pass hosting to other streamers)
-- 💰 Streamer earnings tracking
+## Tech Stack 🛠️
 
-### Gaming
-- ⚽ Football
-- ♟️ Chess
-- 🏎️ Racing Games
-- 🎴 Card Games
-- 🎯 Ludo
-- 🎮 More games coming soon
+### Backend
+- Node.js & Express.js
+- MongoDB with Mongoose
+- Socket.io for real-time features
+- JWT for authentication
+- Stripe for payments
 
-### Monetization
-- 🎁 Gifts during live streams (50% to streamer, 50% to app)
-- 💳 Paid subscription plans
-- 📊 Earnings dashboard
-- 💵 Easy payout system
+### Frontend
+- React 18
+- React Router for navigation
+- Tailwind CSS for styling
+- Zustand for state management
+- Axios for API calls
+- Socket.io-client for real-time updates
 
-## Tech Stack
-
-- **Backend:** Node.js + Express
-- **Frontend:** React + Tailwind CSS
-- **Database:** MongoDB/PostgreSQL
-- **Real-time:** WebSocket (Socket.io)
-- **Streaming:** HLS/RTMP
-- **Hosting:** Railway/Render (Free tier)
-
-## Getting Started
+## Installation 🚀
 
 ### Prerequisites
-- Node.js 16+
-- npm or yarn
-- MongoDB Atlas account (free tier)
+- Node.js (v14 or higher)
+- MongoDB (local or Atlas)
+- Git
 
-### Installation
+### Setup Instructions
 
+1. **Clone the repository**
 ```bash
-git clone https://github.com/olalereanointing7-art/social-networking-dinosaur.git
+git clone https://github.com/yourusername/social-networking-dinosaur.git
 cd social-networking-dinosaur
+```
 
-# Install dependencies
-npm install
+2. **Install dependencies**
+```bash
+npm run install-all
+```
 
-# Setup environment variables
+3. **Configure environment variables**
+
+**Server (.env)**
+```bash
+cd server
 cp .env.example .env
-# Edit .env with your configuration
+```
+Edit `.env` with your MongoDB URI, JWT secret, etc.
 
-# Start development server
+**Client (.env)**
+```bash
+cd ../client
+cp .env.example .env
+```
+
+4. **Start the application**
+
+From the root directory:
+```bash
 npm run dev
 ```
 
-## Environment Variables
+Or separately:
+```bash
+# Terminal 1 - Server
+cd server && npm run dev
 
-```
-DATABASE_URL=your_mongodb_url
-JWT_SECRET=your_secret_key
-STRIPE_KEY=your_stripe_key
-UPLOAD_URL=your_upload_service
-NODE_ENV=development
-PORT=5000
+# Terminal 2 - Client
+cd client && npm start
 ```
 
-## Deployment
+## Project Structure 📁
 
-Deploy to Railway or Render (free):
+```
+social-networking-dinosaur/
+├── server/
+│   ├── models/          # Mongoose schemas
+│   ├── routes/          # API endpoints
+│   ├── middleware/      # Custom middleware
+│   ├── index.js         # Server entry point
+│   └── package.json
+├── client/
+│   ├── public/          # Static files
+│   ├── src/
+│   │   ├── pages/       # React pages
+│   │   ├── components/  # Reusable components
+│   │   ├── store/       # Zustand stores
+│   │   ├── services/    # API services
+│   │   ├── App.js       # Main app component
+│   │   └── index.js     # React entry point
+│   └── package.json
+└── package.json
+```
 
-1. Push to GitHub
-2. Connect your repository to Railway/Render
-3. Set environment variables
-4. Deploy!
+## API Documentation 📚
 
-## Usage
+### Authentication
+- `POST /api/auth/register` - Register new user
+- `POST /api/auth/login` - Login user
+- `POST /api/auth/verify` - Verify token
 
-### For Users
-1. Sign up with email/username
-2. Create your profile
-3. Make posts, comment, and like content
-4. Start live streaming
-5. Play games with friends
-6. Send/receive gifts
+### Users
+- `GET /api/users/:userId` - Get user profile
+- `PUT /api/users/:userId/update` - Update profile
+- `POST /api/users/:userId/follow` - Follow/unfollow user
+- `GET /api/users/search/:query` - Search users
 
-### For Streamers
-1. Go to "Go Live"
-2. Start streaming (video or audio)
-3. Viewers can gift you (you get 50%)
-4. View earnings in dashboard
+### Posts
+- `GET /api/posts/feed` - Get feed
+- `POST /api/posts/create` - Create post
+- `POST /api/posts/:postId/like` - Like/unlike post
+- `DELETE /api/posts/:postId` - Delete post
 
-## API Documentation
+### Comments
+- `POST /api/comments/create` - Add comment
+- `GET /api/comments/post/:postId` - Get comments
+- `POST /api/comments/:commentId/like` - Like comment
+- `DELETE /api/comments/:commentId` - Delete comment
 
-See `docs/API.md` for complete API reference
+### Streams
+- `POST /api/streams/start` - Start stream
+- `PUT /api/streams/:streamId/end` - End stream
+- `GET /api/streams/live` - Get live streams
+- `POST /api/streams/:streamId/join` - Join stream
+- `POST /api/streams/:streamId/gift` - Send gift
 
-## Contributing
+### Games
+- `GET /api/games` - Get all games
+- `GET /api/games/category/:category` - Get games by category
+- `POST /api/games/:gameId/join` - Join game
+- `POST /api/games/:gameId/leave` - Leave game
 
-Pull requests welcome! Please follow our contribution guidelines.
+### Messages
+- `POST /api/messages/send` - Send message
+- `GET /api/messages/conversation/:userId1/:userId2` - Get conversation
+- `PUT /api/messages/:messageId/read` - Mark as read
+- `DELETE /api/messages/:messageId` - Delete message
 
-## License
+## Contributing 🤝
 
-MIT License - See LICENSE file
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-## Support
+## License 📄
 
-Email: anointingolalere4@gmail.com
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Roadmap
+## Support 💬
 
-- [ ] Stories/Reels feature
-- [ ] Advanced search & discovery
-- [ ] Trending section
-- [ ] Video editing tools
+For support, email olalereanointing7@gmail.com or open an issue on GitHub.
+
+## Roadmap 🗺️
+
+- [ ] Video streaming with HLS/RTMP
+- [ ] AI-powered recommendations
 - [ ] Mobile app (React Native)
-- [ ] AI recommendations
-- [ ] More games integration
+- [ ] Payment integration (Stripe)
+- [ ] Admin dashboard
+- [ ] Advanced analytics
+- [ ] Content moderation tools
+- [ ] API rate limiting
 
 ---
 
-**Status:** 🚀 Active Development
-
-**Last Updated:** August 23, 2026
+Built with ❤️ by Anointing Kolapo Olalere
